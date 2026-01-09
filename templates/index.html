@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loan Prediction App</title>
+
+    <style>
+        :root {
+            --primary: #4b6cff;
+
+            --card-light: #ffffffd9;
+            --card-dark: #1b1e27d9;
+
+            --text-light: #1a1a1a;
+            --text-dark: #f2f2f2;
+        }
+
+        /* GLOBAL + BACKGROUND IMAGE */
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+
+            /* Your selected background image */
+            background:
+                linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)),
+                url('https://plus.unsplash.com/premium_photo-1700781723507-f19650941f65?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            transition: 0.3s ease;
+            color: var(--text-light);
+        }
+
+        body.dark {
+            background:
+                linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+                url('https://plus.unsplash.com/premium_photo-1700781723507-f19650941f65?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-dark);
+        }
+
+        /* NAVBAR */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 32px;
+            background: var(--primary);
+            color: white;
+            backdrop-filter: blur(12px);
+        }
+
+        /* BIG HEADING */
+        .title {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        /* TINY MOON ICON */
+        .dark-btn {
+            background: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            color: var(--primary);
+            font-size: 16px;
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            transition: 0.2s ease;
+        }
+
+        .dark-btn:hover {
+            transform: scale(1.15);
+            background: #eaeaea;
+        }
+
+        /* FORM CARD */
+        .container {
+            max-width: 550px;
+            margin: 60px auto;
+            padding: 40px;
+            border-radius: 22px;
+
+            background: var(--card-light);
+            backdrop-filter: blur(20px);
+
+            box-shadow: 0 10px 35px rgba(0,0,0,0.4);
+            animation: fade 0.5s ease;
+        }
+
+        body.dark .container {
+            background: var(--card-dark);
+            box-shadow: 0 10px 45px rgba(0,0,0,0.7);
+        }
+
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* FORM HEADING */
+        h2 {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        /* INPUT FIELDS */
+        label {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 7px 0 18px;
+            border-radius: 12px;
+            border: 1px solid #cccccc;
+
+            background: #ffffffcc;
+            outline: none;
+            font-size: 14px;
+            transition: 0.2s ease;
+        }
+
+        body.dark input, 
+        body.dark select {
+            background: #2a2d36;
+            border: 1px solid #555;
+            color: white;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 8px rgba(75,108,255,0.5);
+        }
+
+        /* BUTTON */
+        button {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            background: var(--primary);
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        button:hover {
+            background: #324fd1;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(75,108,255,0.4);
+        }
+    </style>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark");
+        }
+    </script>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <span class="title">LOAN PREDICTION APP</span>
+    <button class="dark-btn" onclick="toggleDarkMode()">🌙</button>
+</nav>
+
+<!-- FORM CARD -->
+<div class="container">
+    <h2>Loan Default Prediction</h2>
+
+    <form action="/predict" method="POST">
+
+        <label>Age</label>
+        <input type="number" name="Age" required>
+
+        <label>Income</label>
+        <input type="number" name="Income" required>
+
+        <label>Loan Amount</label>
+        <input type="number" name="LoanAmount" required>
+
+        <label>Credit Score</label>
+        <input type="number" name="CreditScore" required>
+
+        <label>Months Employed</label>
+        <input type="number" name="MonthsEmployed" required>
+
+        <label>Number of Credit Lines</label>
+        <input type="number" name="NumCreditLines" required>
+
+        <label>Interest Rate</label>
+        <input type="number" step="0.01" name="InterestRate" required>
+
+        <label>Loan Term</label>
+        <input type="number" name="LoanTerm" required>
+
+        <label>DTI Ratio</label>
+        <input type="number" step="0.01" name="DTIRatio" required>
+
+        <label>Education</label>
+        <select name="Education">
+            <option>Bachelor's</option>
+            <option>Master's</option>
+            <option>PhD</option>
+            <option>High School</option>
+        </select>
+
+        <label>Employment Type</label>
+        <select name="EmploymentType">
+            <option>Full-time</option>
+            <option>Part-time</option>
+            <option>Self-employed</option>
+            <option>Unemployed</option>
+        </select>
+
+        <label>Marital Status</label>
+        <select name="MaritalStatus">
+            <option>Single</option>
+            <option>Married</option>
+            <option>Divorced</option>
+        </select>
+
+        <label>Has Mortgage</label>
+        <select name="HasMortgage">
+            <option>Yes</option>
+            <option>No</option>
+        </select>
+
+        <label>Has Dependents</label>
+        <select name="HasDependents">
+            <option>Yes</option>
+            <option>No</option>
+        </select>
+
+        <label>Has Co-Signer</label>
+        <select name="HasCoSigner">
+            <option>Yes</option>
+            <option>No</option>
+        </select>
+
+        <button type="submit">Predict</button>
+    </form>
+</div>
+
+</body>
+</html>

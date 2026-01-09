@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Result</title>
+
+    <style>
+        :root {
+            --primary: #4b6cff;
+            --card-light: #ffffffd9;
+            --card-dark: #1b1e27d9;
+        }
+
+        /* GLOBAL + BACKGROUND IMAGE (same as index.html) */
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+
+            background:
+                linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)),
+                url('https://plus.unsplash.com/premium_photo-1700781723507-f19650941f65?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            padding-top: 80px;
+            transition: 0.4s ease;
+            text-align: center;
+        }
+
+        body.dark {
+            background:
+                linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+                url('https://plus.unsplash.com/premium_photo-1700781723507-f19650941f65?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+
+        /* RESULT CARD */
+        .card {
+            width: 450px;
+            margin: auto;
+            padding: 30px 35px;
+            border-radius: 22px;
+
+            background: var(--card-light);
+            backdrop-filter: blur(18px);
+
+            box-shadow: 0 10px 35px rgba(0,0,0,0.45);
+            animation: pop 0.5s ease;
+        }
+
+        body.dark .card {
+            background: var(--card-dark);
+            box-shadow: 0 10px 45px rgba(0,0,0,0.7);
+            color: white;
+        }
+
+        .success {
+            border-left: 8px solid #1cc88a;
+        }
+
+        .danger {
+            border-left: 8px solid #e74a3b;
+        }
+
+        /* Heading */
+        h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        /* Animation */
+        @keyframes pop {
+            from { transform: scale(0.85); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
+        }
+
+        /* Button */
+        .btn {
+            margin-top: 25px;
+            display: inline-block;
+            padding: 12px 22px;
+
+            background: var(--primary);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+
+            border-radius: 10px;
+            text-decoration: none;
+            transition: 0.25s ease;
+        }
+
+        .btn:hover {
+            background: #324fd4;
+            box-shadow: 0 6px 15px rgba(75,108,255,0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Dark Mode Button (tiny moon icon) */
+        .dark-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+
+            background: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+
+            color: var(--primary);
+            font-size: 16px;
+
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            transition: 0.2s ease;
+        }
+
+        .dark-btn:hover {
+            transform: scale(1.12);
+            background: #eaeaea;
+        }
+    </style>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark");
+        }
+    </script>
+</head>
+
+<body>
+
+<!-- TINY DARK MODE ICON -->
+<button class="dark-btn" onclick="toggleDarkMode()">🌙</button>
+
+<!-- RESULT CARD -->
+<div class="card {{ card_class }}">
+    <h1>{{ message }}</h1>
+
+    <a class="btn" href="/">Go Back</a>
+</div>
+
+</body>
+</html>
